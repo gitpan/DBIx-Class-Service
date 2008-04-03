@@ -20,4 +20,4 @@ requires:
   Class::Inspector: 0
   DBIx::Class: 0
   Module::Find: 0
-version: 0.01
+version: 0.02

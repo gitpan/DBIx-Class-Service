@@ -16,11 +16,11 @@ DBIx::Class::ServiceManager - Load DBIx::Class::Service objects and create acces
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -188,9 +188,9 @@ SERVICE_PROXY
                     eval {
                         @ret = $proto->service_class->$method($schema, @args) || ();
                     };
-                    if ($@) {
+                    if (my $exception = $@) {
                         $schema->txn_rollback;
-                        croak($@);
+                        croak($exception);
                     }
                     $schema->txn_commit;
                     return wantarray ? @ret : $ret[0];
